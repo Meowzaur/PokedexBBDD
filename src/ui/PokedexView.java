@@ -178,12 +178,12 @@ public class PokedexView {
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(281, 227, 89, 23);
 		frmPokedex.getContentPane().add(btnBorrar);
-		
+
 		btnActualizarConfirmar = new JButton("Actualizar");
 		btnActualizarConfirmar.setBounds(108, 210, 96, 23);
 		frmPokedex.getContentPane().add(btnActualizarConfirmar);
 		btnActualizarConfirmar.setVisible(false);
-		
+
 		btnActualizarCancelar = new JButton("Cancelar");
 		btnActualizarCancelar.setBounds(231, 210, 96, 23);
 		frmPokedex.getContentPane().add(btnActualizarCancelar);
@@ -191,7 +191,10 @@ public class PokedexView {
 	}
 
 	private void configureListeners() {
-
+		/**
+		 * Botón Anterior: Resta un número al contador, pero si el número es menor que
+		 * 0, cambia al último número de la lista de la BBDD. Luego, actualiza la vista.
+		 */
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contador--;
@@ -202,6 +205,11 @@ public class PokedexView {
 			}
 		});
 
+		/**
+		 * Botón Siguiente: Suma un número al contador, pero si el número es mayor que
+		 * la última posición de la lista de la BBDD, cambia a 0. Luego, actualiza la
+		 * vista.
+		 */
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contador++;
@@ -212,12 +220,18 @@ public class PokedexView {
 			}
 		});
 
+		/**
+		 * Botón Actualizar: ejecuta "invertirElementos".
+		 */
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				invertirElementos();
 			}
 		});
 
+		/**
+		 * Botón Crear: Cierra PokedexView y abre CrearView.
+		 */
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmPokedex.setVisible(false);
@@ -225,6 +239,11 @@ public class PokedexView {
 			}
 		});
 
+		/**
+		 * Botón Borrar: Respecto a la vista, borrará ese elemento incluso de su BBDD.
+		 * Reseteará el contador. Si quedan elementos en la BBDD, ejecuta
+		 * "actualizarVista"; si no, ejecuta "listaVacia".
+		 */
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Pokemon p = pokemons.get(contador);
@@ -238,14 +257,20 @@ public class PokedexView {
 				}
 			}
 		});
-		
+
+		/**
+		 * Botón Confirmar: ejecuta "actualizarPokemon" e "invertirElementos".
+		 */
 		btnActualizarConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarPokemon();
 				invertirElementos();
 			}
 		});
-		
+
+		/**
+		 * Botón Cancelar: ejecuta "invertirElementos".
+		 */
 		btnActualizarCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				invertirElementos();
@@ -254,6 +279,9 @@ public class PokedexView {
 
 	}
 
+	/**
+	 * Respecto al número del contador, imprime la posición del elemento de la BBDD.
+	 */
 	public void actualizarVista() {
 		Pokemon p = pokemons.get(contador);
 		tfNumero.setText(String.valueOf(p.getNumero()));
@@ -265,7 +293,10 @@ public class PokedexView {
 		tfCategoria.setText(p.getCategoria());
 		tfHabilidad.setText(p.getHabilidad());
 	}
-	
+
+	/**
+	 * Imprime los campos pero vacíos.
+	 */
 	public void listaVacia() {
 		tfNumero.setText("");
 		tfNombre.setText("");
@@ -275,9 +306,13 @@ public class PokedexView {
 		tfPeso.setText("");
 		tfCategoria.setText("");
 		tfHabilidad.setText("");
-		
+
 	}
-	
+
+	/**
+	 * Hace editable los campos si no son editables y viceversa. También oculta los
+	 * botones visibles y viceversa.
+	 */
 	public void invertirElementos() {
 		tfNombre.setEditable(!tfNombre.isEditable());
 		tfTipo1.setEditable(!tfTipo1.isEditable());
@@ -295,7 +330,10 @@ public class PokedexView {
 		btnActualizarCancelar.setVisible(!btnActualizarCancelar.isVisible());
 		actualizarVista();
 	}
-	
+
+	/**
+	 * Actualiza los datos cambiados en la BBDD.
+	 */
 	public void actualizarPokemon() {
 		Pokemon p = pokemons.get(contador);
 		p.setNombre(tfNombre.getText());

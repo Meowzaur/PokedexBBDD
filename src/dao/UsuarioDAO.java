@@ -14,6 +14,9 @@ public class UsuarioDAO {
 	final String USER = "pablo";
 	final String PASS = "123456";
 
+	/**
+	 * Imprime todos los usuarios de la BBDD.
+	 */
 	public void consulta() {
 		final String QUERY = "SELECT nombre, password FROM usuario";
 		try {
@@ -29,6 +32,11 @@ public class UsuarioDAO {
 		}
 	}
 
+	/**
+	 * Selecciona el usuario de la BBDD.
+	 * @param usuario Usuario seleccionado.
+	 * @return Devuelve el usuario.
+	 */
 	public boolean login(Usuario usuario) {
 		final String QUERY = "SELECT nombre, password FROM usuario " + "WHERE nombre	= '" + usuario.getNombre()
 				+ "' AND password = '" + usuario.getPassword() + "'";
@@ -43,6 +51,10 @@ public class UsuarioDAO {
 		}
 	}
 
+	/**
+	 * Inserta al usuario seleccionado en la BBDD.
+	 * @param usuario Usuario seleccionado.
+	 */
 	public void registrar(Usuario usuario) {
 		final String INSERT = "INSERT INTO usuario (nombre, password) VALUES " + "('" + usuario.getNombre() + "','"
 				+ usuario.getPassword() + "');";

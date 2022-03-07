@@ -15,6 +15,10 @@ public class PokemonDAO {
 	final String USER = "pablo";
 	final String PASS = "123456";
 
+	/**
+	 * Selecciona el primer registro de la BBDD.
+	 * @return Devuelve el primer Pokemon de la BBDD.
+	 */
 	public Pokemon primero() {
 		final String QUERY = "SELECT numero, nombre, tipo1, tipo2, "
 				+ "altura, peso, categoria, habilidad FROM pokemon LIMIT 1";
@@ -40,6 +44,10 @@ public class PokemonDAO {
 		return null;
 	}
 
+	/**
+	 * Hace un ArrayList con los datos de la BBDD.
+	 * @return Devuelve un ArrayList con los datos de la BBDD.
+	 */
 	public ArrayList<Pokemon> getAll() {
 		final String QUERY = "SELECT numero, nombre, tipo1, tipo2, "
 				+ "altura, peso, categoria, habilidad FROM pokemon";
@@ -66,6 +74,10 @@ public class PokemonDAO {
 		return pokemons;
 	}
 
+	/**
+	 * Inserta el Pokemon seleccionado.
+	 * @param p Pokemon seleccionado.
+	 */
 	public void insertar(Pokemon p) {
 		final String INSERT = "INSERT INTO pokemon(numero,nombre,tipo1,tipo2,altura,peso,categoria,habilidad) "
 				+ "VALUES('" + p.getNumero() + "','" + p.getNombre() + "','" + p.getTipo1() + "','" + p.getTipo2()
@@ -80,6 +92,10 @@ public class PokemonDAO {
 		}
 	}
 
+	/**
+	 * Borra el Pokemon seleccionado.
+	 * @param p Pokémon seleccionado.
+	 */
 	public void borrar(Pokemon p) {
 		final String DELETE = "DELETE FROM pokemon WHERE numero='" + p.getNumero() + "'";
 		try {
@@ -91,6 +107,10 @@ public class PokemonDAO {
 		}
 	}
 
+	/**
+	 * Actualiza el Pokemon seleccionado.
+	 * @param p Pokemon seleccionado.
+	 */
 	public void actualizar(Pokemon p) {
 		final String UPDATE = "UPDATE pokemon SET nombre = '" + p.getNombre() + "', tipo1 = '" + p.getTipo1()
 				+ "', tipo2 = '" + p.getTipo2() + "', altura = '" + p.getAltura() + "', peso = '" + p.getPeso()

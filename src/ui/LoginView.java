@@ -84,13 +84,18 @@ public class LoginView {
 	}
 
 	public void configureListeners() {
-
+		/**
+		 * Botón Entrar: ejecuta "comprobarLogin".
+		 */
 		btnEntrarLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comprobarLogin();
 			}
 		});
 
+		/**
+		 * Pulsar intro en la ranura de Password: ejecuta "comprobarLogin".
+		 */
 		pfPasswordLogin.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -100,6 +105,9 @@ public class LoginView {
 			}
 		});
 
+		/**
+		 * Botón Registrar: cierra LoginView y abre RegistroView.
+		 */
 		btnIrARegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmLogin.dispose();
@@ -108,6 +116,12 @@ public class LoginView {
 		});
 	}
 
+	/**
+	 * Obtiene los valores de nombre y contraseña, y los asigna en un usuario
+	 * imaginario. Devuelve un boolean si esos datos coinciden con un usuario de la
+	 * BBDD. Si es true, cierra LoginView y abre PokedexView. Si es false, salta un
+	 * mensaje de error.
+	 */
 	private void comprobarLogin() {
 		String nombre = tfNombreLogin.getText();
 		String password = new String(pfPasswordLogin.getPassword());

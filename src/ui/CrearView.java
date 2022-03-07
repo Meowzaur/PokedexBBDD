@@ -149,7 +149,12 @@ public class CrearView {
 	}
 
 	private void configureListeners() {
-
+		/**
+		 * Botón Crear: Comprueba si alguna de las celdas está vacía, exceptuando Tipo2.
+		 * En caso de que alguna esté vacía excepto Tipo2, devuelve un mensaje de error.
+		 * Introduce estos datos en la base de datos, cierra CrearView y abre
+		 * PokedexView.
+		 */
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -181,6 +186,9 @@ public class CrearView {
 			}
 		});
 
+		/**
+		 * Botón Volver: Cierra CrearView y abre PokedexView.
+		 */
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmCrear.dispose();
